@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
   }
-  
+
+  scope module: :public do
+    root :to =>"homes#top"
+    get 'homes/about' => 'homes#about',as: 'public/homes/about'
+  end
+
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }

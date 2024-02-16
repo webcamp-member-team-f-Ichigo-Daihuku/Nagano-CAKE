@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <div class="nav-link">
         <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? %>
+        <% if signed_in? %>
           <li>
             <%= link_to "マイページ",class: 'nav-link text-light' %>
           </li>
@@ -23,7 +23,7 @@
           </li>
         <% else %>
           <li>
-            <%= link_to "About",class: 'nav-link text-light' %>
+            <%= link_to "About", public_homes_about_path ,class: 'nav-link text-light' %>
           </li>
           <li>
             <%= link_to "商品一覧",class: 'nav-link text-light' %>
