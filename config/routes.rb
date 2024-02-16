@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   devise_for :publics,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
+  registrations: 'public/registrations',
   sessions: 'public/sessions'
   }
 
   scope module: :public do
-    root :to =>"homes#top"
+    root to: 'homes#top'
     get 'homes/about' => 'homes#about',as: 'public/homes/about'
   end
 
