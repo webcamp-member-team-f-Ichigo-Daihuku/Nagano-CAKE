@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(version: 2024_02_17_085553) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_details", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "order_id"
-    t.integer "making_status"
+  create_table "items", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "name"
+    t.text "introduction"
     t.integer "price"
-    t.integer "amount"
+    t.boolean "is_active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

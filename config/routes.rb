@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
-  resources :genres,only: [:edit, :create, :index, :update]
-  resources :orders,only: [:index, :show]
+    resources :genres,only: [:edit, :create, :index, :update]
+    resources :orders,only: [:index, :show]
+    resources :items,only: [:index, :new, :create, :show, :edit, :update]
   end
 
   namespace :public do
@@ -23,5 +24,6 @@ Rails.application.routes.draw do
     get 'orders/thanks'
       root to: 'homes#top'
     get 'homes/about' => 'homes#about',as: 'public/homes/about'
+
   end
 end
