@@ -1,0 +1,52 @@
+<h5>商品新規登録</h5>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 mx-auto">
+      <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+      <div class="form-group">
+        <div class="field">
+          <%= f.label :商品画像 %>
+          <%= f.file_field :item_image, accept: "image/*" %>
+        </div>
+        <div class="field">
+          <%= f.label :商品名 %>
+          <%= f.text_field :name, class: "form-control name" %>
+        </div>
+        <div class="area">
+          <%= f.label :商品説明 %>
+          <%= f.text_area :introduction, class: "form-control introduction" %>
+        </div>
+        <div class="field">
+          <%= f.label :ジャンル %>
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい" %>
+        </div>
+        <div class="field">
+          <%= f.label :税抜価格 %>
+          <div class="input-group">
+            <%= f.text_field :price, class: "form-control price" %>
+            <div class="input-group-append">
+              <span>円</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :is_active, '販売ステータス', class: 'col-sm-3 col-form-label' %>
+          <div class="col-sm-9">
+            <div class="custom-control custom-radio custom-control-inline">
+              <%= f.radio_button :is_active, 'on_sale', checked: @item.is_active == 'on_sale', class: 'custom-control-input', id: 'is_active-on-sale' %>
+              <%= f.label :is_active, '販売中', class: 'custom-control-label', for: 'is_active-on-sale' %>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <%= f.radio_button :is_active, 'off_sale', checked: @item.is_active == 'off_sale', class: 'custom-control-input', id: 'is_active-off-sale' %>
+              <%= f.label :is_active, '販売停止中', class: 'custom-control-label', for: 'is_active-off-sale' %>
+            </div>
+          </div>
+          </div>
+          <div class="actions mx-auto">
+            <%= f.submit "新規登録", class: "btn btn-success" %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
