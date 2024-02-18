@@ -1,17 +1,9 @@
 Rails.application.routes.draw do
+
   devise_for :publics,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
+  registrations: 'public/registrations',
   sessions: 'public/sessions'
   }
-
-  namespace :public do
-    # 退会確認画面
-    get  '/publicers/check' => 'publicers#check'
-    # 論理削除用のルーティング
-    patch  '/publicers/withdraw' => 'publicers#withdraw'
-    # get 'publicers/my_page'
-    resources :publicers, only: [:show, :edit, :update]
-  end
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
@@ -19,6 +11,19 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :genres,only: [:edit, :create, :index, :update]
+    resources :orders,only: [:index, :show]
+    resources :items,only: [:index, :new, :create, :show, :edit, :update]
   end
 
+  namespace :public do
+    get  '/publicers/check' => 'publicers#check'
+    patch  '/publicers/withdraw' => 'publicers#withdraw'
+    resources :publicers, only: [:show, :edit, :update]
+    resources :orders,only: [:new, :create, :index, :show]
+    post 'orders/confirm'
+    get 'orders/thanks'
+      root to: 'homes#top'
+    get 'homes/about' => 'homes#about',as: 'public/homes/about'
+
+  end
 end
