@@ -32,6 +32,13 @@ class DeviseCreatePublics < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string "last_name", null: false
+      t.string "first_name", null: false
+      t.string "last_name_kana", null: false
+      t.string "first_name_kana", null: false
+      t.string "postal_code", null: false
+      t.string "address", null: false
+      t.string "telephone_number", null: false
 
       t.timestamps null: false
     end
@@ -40,5 +47,6 @@ class DeviseCreatePublics < ActiveRecord::Migration[6.1]
     add_index :publics, :reset_password_token, unique: true
     # add_index :publics, :confirmation_token,   unique: true
     # add_index :publics, :unlock_token,         unique: true
+    add_column :publics, :is_active, :boolean, default: true, null: false
   end
 end

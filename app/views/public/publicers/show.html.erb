@@ -1,0 +1,14 @@
+<h2>マイページ</h2>
+<h4>登録情報</h4>
+<%= link_to "編集する", edit_public_publicer_path(@publicer) %>
+情報引用<br />
+氏名　<%= @publicer.last_name %> <%= @publicer.first_name %><br />
+カナ　<%= @publicer.last_name_kana %> <%= @publicer.first_name_kana %><br />
+郵便番号　<%= @publicer.postal_code %><br />
+住所　<%= @publicer.address %><br />
+電話番号　<%= @publicer.telephone_number %><br />
+メールアドレス　<%= @publicer.email %><br />
+<h4>配送先</h4>
+一覧を見る
+<h4>注文履歴</h4>
+一覧を見る
