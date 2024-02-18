@@ -3,13 +3,22 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
   }
-  
+
+  namespace :public do
+    # 退会確認画面
+    get  '/publicers/check' => 'publicers#check'
+    # 論理削除用のルーティング
+    patch  '/publicers/withdraw' => 'publicers#withdraw'
+    # get 'publicers/my_page'
+    resources :publicers, only: [:show, :edit, :update]
+  end
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-namespace :admin do
-  resources :genres,only: [:edit, :create, :index, :update]
-end
+
+  namespace :admin do
+    resources :genres,only: [:edit, :create, :index, :update]
+  end
 
 end
