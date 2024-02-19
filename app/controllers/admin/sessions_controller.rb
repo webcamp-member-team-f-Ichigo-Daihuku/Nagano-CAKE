@@ -20,7 +20,8 @@ class Admin::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     # public_root_path(current_admin.id)
-    admin_publicers_path
+    admin_orders_path
+    # ordersの名称が違う。正しくはhomesのtopアクション（こーへい）
   end
 
   protected
