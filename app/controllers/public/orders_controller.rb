@@ -1,6 +1,6 @@
-class Public::OrdersController < 
+class Public::OrdersController < ApplicationController
    before_action :authenticate_public!, only: [:new, :confirm, :create, :index, :show, :thanks]
-  
+
   def new
     @order = Order.new
     @addresses = current_public.adresses.all
@@ -10,13 +10,13 @@ class Public::OrdersController <
     @cart_items = CartItem.where(public_id: current_public.id)
     @shipping_cost = 800
     @selected_payment_method = params[:order][:pey_method]
-    
+
     ary = []
     @cart_items.each do |cart_item|
       ary << cart_item.item.price*cart_item.amount
-    end 
+    end
     @cart_items_price = ary.sum
-    
+
     @total_price = @shipping_cost + @cart_items_price
     @address_type = params[:order][:address_type]
     case @address_type
@@ -34,8 +34,8 @@ class Public::OrdersController <
         @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + " " + params[:order][:new_name]
       else
         render :new
-      end 
-    end 
+      end
+    end
   end
 
   def thanks
@@ -58,7 +58,7 @@ class Public::OrdersController <
       else
         @order.status = 0
       end
-      
+
       address_type = params[:order][:address_type]
       case address_type
       when "public_address"
@@ -75,7 +75,7 @@ class Public::OrdersController <
       @order.address = params[:order][:new_address]
       @order.name = params[:order][:new_name]
       end
-    
+
       if @order.save
         if @order.status == 0
           @cart_items.each do |cart_item|
@@ -91,10 +91,14 @@ class Public::OrdersController <
       else
         render :new
       end
-  end 
-  
+<<<<<<< HEAD
+  end
+=======
+  end
+
    def show
       @order = Order.find(params[:id])
       @order_details= OrderDetail.where(order_id: @order.id)
    end
+>>>>>>> origin/develop
 end

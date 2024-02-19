@@ -33,12 +33,12 @@
           <%= f.label :is_active, '販売ステータス', class: 'col-sm-3 col-form-label' %>
           <div class="col-sm-9">
             <div class="custom-control custom-radio custom-control-inline">
-              <%= f.radio_button :is_active, 'on_sale', checked: @item.is_active == 'on_sale', class: 'custom-control-input', id: 'is_active-on-sale' %>
-              <%= f.label :is_active, '販売中', class: 'custom-control-label', for: 'is_active-on-sale' %>
+              <%= f.radio_button :is_active, true, checked: @item.is_active == true, class: 'custom-control-input', id: 'is_active-true' %>
+              <%= f.label :is_active, '販売中', class: 'custom-control-label', for: 'is_active-true' %>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <%= f.radio_button :is_active, 'off_sale', checked: @item.is_active == 'off_sale', class: 'custom-control-input', id: 'is_active-off-sale' %>
-              <%= f.label :is_active, '販売停止中', class: 'custom-control-label', for: 'is_active-off-sale' %>
+              <%= f.radio_button :is_active, false, checked: @item.is_active == false, class: 'custom-control-input', id: 'is_active-false' %>
+              <%= f.label :is_active, '販売停止中', class: 'custom-control-label', for: 'is_active-false' %>
             </div>
           </div>
           <div class="actions mx-auto">

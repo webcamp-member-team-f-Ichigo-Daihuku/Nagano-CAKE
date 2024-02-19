@@ -1,0 +1,20 @@
+<%= render 'admin/genres/searth', genres: @genres %>
+
+<table>
+  <h2>商品一覧</h2>
+  <h6>（全<%= @items.count %>件）</h6>
+  <thead>
+  <% @item.each do |item| %>
+    <tr>
+      <th>
+        <%= link_to item_path(item) do %>
+          <%= image_tag item.get_item_image(500,500) %>
+        <% end %>
+      </th><br>
+      <th><%= item.name %></th><br>
+      <th>¥<%= item.with_tax_price%></th><br>
+    </tr>
+  <% end %>
+  </thead>
+</table>
+<%= paginate @item %>
