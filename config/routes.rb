@@ -26,14 +26,14 @@ Rails.application.routes.draw do
     resources :genres,only: [:edit, :create, :index, :update]
     resources :orders,only: [:index, :show]
     resources :items,only: [:index, :new, :create, :show, :edit, :update]
-    resources :publicers, only: [:index, :show, :edit, :update]
   end
 
   namespace :public do
     get  '/publicers/check' => 'publicers#check'
     patch  '/publicers/withdraw' => 'publicers#withdraw'
     resources :publicers, only: [:show, :edit, :update]
-    resources :orders,only: [:new, :create, :index, :show]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :orders, only: [:new, :create, :index, :show]
     post 'orders/confirm'
     get 'orders/thanks'
       root to: 'homes#top'
