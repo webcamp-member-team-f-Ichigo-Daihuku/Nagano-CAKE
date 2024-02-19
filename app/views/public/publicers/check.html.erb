@@ -6,5 +6,4 @@
   </p>
 
   <%= link_to "退会しない", public_publicer_path(current_public.id), :class => "btn btn-primary ms-3" %>
-  <%#= link_to "退会する", public_public_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
   <%= link_to "退会する", public_publicers_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>

@@ -263,11 +263,8 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
-<<<<<<< HEAD
-  image_processing (~> 1.2)
-=======
   enum_help
->>>>>>> origin/develop
+  image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
   listen (~> 3.3)
