@@ -1,4 +1,4 @@
-class Public::OrdersController < 
+class Public::OrdersController < ApplicationController
    before_action :authenticate_public!, only: [:new, :confirm, :create, :index, :show, :thanks]
   
   def new
