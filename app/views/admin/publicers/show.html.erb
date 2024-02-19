@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5"><%= @publicer.full_name %>さんの会員詳細</h4>
+      <div class="d-flex align-items-center">
+        <table class="table table-bordrless">
+          <tr>
+            <th>会員ID</th>
+            <td><%= @publicer.id %></td>
+          </tr>
+          <tr>
+            <th>氏名</th>
+            <td><%= @publicer.last_name %> <%= @publicer.first_name %></td>
+          </tr>
+          <tr>
+            <th>カナ</th>
+            <td><%= @publicer.last_name_kana %> <%= @publicer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <th>郵便番号</th>
+            <td><%= @publicer.postal_code %></td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td><%= @publicer.address %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @publicer.telephone_number %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @publicer.email %></td>
+          </tr>
+          <tr>
+            <th>会員ステータス</th>
+            <td><%= @publicer.publicer_status %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= link_to "編集する", edit_admin_publicer_path(@publicer) %>
+            <h4>注文履歴</h4>一覧を見る</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

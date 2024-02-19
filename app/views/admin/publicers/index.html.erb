@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5">会員一覧</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <% @publicers.each do |publicer| %>
+          <tr>
+            <td><%= publicer.id %></td>
+            <td><%= link_to publicer.full_name, admin_publicer_path(publicer) %></td>
+            <td><%= publicer.email %></td>
+            <td><%= publicer.publicer_status %></td>
+          </tr>
+        <% end %>
+        <%= paginate @publicers %>
+      </table>
+    </div>
+  </div>
+</div>
