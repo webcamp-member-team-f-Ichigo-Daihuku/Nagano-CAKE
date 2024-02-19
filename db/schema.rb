@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2024_02_17_085553) do
-
+ActiveRecord::Schema.define(version: 2024_02_18_120136) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +52,14 @@ ActiveRecord::Schema.define(version: 2024_02_17_085553) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "public_id"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "genres", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -65,20 +71,22 @@ ActiveRecord::Schema.define(version: 2024_02_17_085553) do
     t.string "name"
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "order_id"
+    t.integer "making_status"
+    t.integer "price"
+    t.integer "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "public_id", null: false
-    t.string "postal_code", null: false
-    t.string "address", null: false
-    t.string "name", null: false
-    t.integer "shipping_cost", null: false
-    t.integer "total_payment", null: false
-    t.integer "payment_method", null: false
-    t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -95,8 +103,6 @@ ActiveRecord::Schema.define(version: 2024_02_17_085553) do
     t.index ["reset_password_token"], name: "index_publics_on_reset_password_token", unique: true
   end
 
-
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -108,7 +114,6 @@ ActiveRecord::Schema.define(version: 2024_02_17_085553) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"

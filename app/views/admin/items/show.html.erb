@@ -1,4 +1,5 @@
 <h5>商品詳細</h5>
+<table>
 <thead>
   <tr>
     <th><%= image_tag @item.get_item_image(500,500) %></th><br>
@@ -13,10 +14,10 @@
   <tr>
     <td><%= @item.name %></td><br>
     <td><%= @item.introduction %></td><br>
-    <td><%= @item.genre_id %></td><br>
-    <td><%= @item.add_tax_price.to_s(:delimited) %>（<%= @item.price %>）円</td><br>
+    <td><%= @item.genre.name %></td><br>
+    <td><%= @item.with_tax_price%>（<%= @item.price %>）円</td><br>
     <td>
-      <% if @item.is_active == 'on_sale' %>
+      <% if @item.is_active == true %>
         <span class="text-success"><strong>販売中</strong></span>
       <% else %>
         <span class="text-muted"><strong>販売停止中</strong></span>
@@ -25,3 +26,4 @@
   </tr><br>
   <td><%= link_to "編集する", edit_admin_item_path, class: "btn btn-sm btn-success" %></td>
 </tbody>
+</table>
