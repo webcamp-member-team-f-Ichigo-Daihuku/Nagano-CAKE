@@ -1,9 +1,4 @@
 class Admin::OrdersController < ApplicationController
-  def index
-    @orders = Order.page(params[:page])
-    @order = Order.find(params[:id])
-  end
-
   def show
     @order = Order.find(params[:id])
     @order_details= OrderDetail.where(order_id: @order.id)

@@ -1,0 +1,25 @@
+<%= render 'admin/genres/searth', genres: @genres %>
+
+<%= form_with model: @cart_item, url: cart_items_path do |f| %>
+  <div class="form-group">
+    <div class="field">
+      <%= image_tag @item.get_item_image(500,500) %>
+    </div>
+    <div class="field">
+      <%= @item.name %>
+    </div>
+    <div class="area">
+      <%= @item.introduction %>
+    </div>
+    <div class="field">
+      ¥<%= @item.with_tax_price%>(税込)
+    </div>
+    <div class="field">
+      <%= f.hidden_field :item_id,value: @item.id %>
+      <%= f.select :amount, (1..10), include_blank: "個数選択" %>
+    </div>
+    <div class="actions mx-auto">
+      <%= f.submit "カートに入れる", class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
