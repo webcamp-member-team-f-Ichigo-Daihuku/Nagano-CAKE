@@ -19,6 +19,14 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def after_sign_in_path_for(resource)
+    public_publicer_path(current_public.id)
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
   protected
 
   def reject_public
@@ -33,6 +41,10 @@ class Public::SessionsController < Devise::SessionsController
     else
       flash[:notice] = "該当するユーザーが見つかりません"
     end
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
