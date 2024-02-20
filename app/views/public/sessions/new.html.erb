@@ -1,20 +1,35 @@
-<h2>ログイン</h2>
-<h4>会員の方はこちらからログイン</h4>
-<%= form_with model: @public, url: public_session_path do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5">ログイン</h4>
+      <h6>会員の方はこちらからログイン</h6>
+      <table class="table table-borderless">
+        <%= form_with model: @public, url: public_session_path do |f| %>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= f.text_field :email, autofocus: true, autocomplete: "email" %></td>
+          <td></td>
+        </tr>
 
-  <div class="field">
-    <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <tr>
+          <td>パスワード</td>
+          <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+          <td></td>
+        </tr>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
+        <tr>
+          <td></td>
+          <td><%= f.submit "ログイン" %></td>
+        </tr>
 
-<h4>会員登録がお済みでない方</h4>
-<h5><%= link_to "こちら", new_public_registration_path %>　から新規登録を行ってください。</h5>
+        <% end %>
+      </table>
+      <h4 class="my-5">会員登録がお済みでない方</h4>
+      <table>
+        <tr>
+          <td><%= link_to "こちら", new_public_registration_path %>　から新規登録を行ってください。</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
