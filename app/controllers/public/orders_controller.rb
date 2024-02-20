@@ -91,14 +91,10 @@ class Public::OrdersController < ApplicationController
       else
         render :new
       end
-<<<<<<< HEAD
-  end
-=======
   end
 
    def show
       @order = Order.find(params[:id])
       @order_details= OrderDetail.where(order_id: @order.id)
    end
->>>>>>> origin/develop
 end
