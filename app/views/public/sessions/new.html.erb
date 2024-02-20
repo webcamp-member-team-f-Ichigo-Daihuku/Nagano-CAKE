@@ -3,27 +3,24 @@
     <div class="col">
       <h4 class="my-5">ログイン</h4>
       <h6>会員の方はこちらからログイン</h6>
+      <%= form_with model: @public, url: public_session_path do |f| %>
       <table class="table table-borderless">
-        <%= form_with model: @public, url: public_session_path do |f| %>
         <tr>
           <td>メールアドレス</td>
           <td><%= f.text_field :email, autofocus: true, autocomplete: "email" %></td>
           <td></td>
         </tr>
-
         <tr>
           <td>パスワード</td>
           <td><%= f.password_field :password, autocomplete: "current-password" %></td>
           <td></td>
         </tr>
-
         <tr>
           <td></td>
           <td><%= f.submit "ログイン" %></td>
         </tr>
-
-        <% end %>
       </table>
+      <% end %>
       <h4 class="my-5">会員登録がお済みでない方</h4>
       <table>
         <tr>
