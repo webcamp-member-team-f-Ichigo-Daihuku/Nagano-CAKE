@@ -9,8 +9,9 @@
         <div class="nav-link">
         <ul class="navbar-nav ml-auto">
         <% if signed_in? %>
+          <li class="nav-item login-publicer text-light">ようこそ、<%= current_public.last_name %>さん！</li>
           <li>
-            <%= link_to "マイページ",class: 'nav-link text-light' %>
+            <%= link_to "マイページ",public_publicer_path(current_public.id),class: 'nav-link text-light' %>
           </li>
           <li>
             <%= link_to "商品一覧",items_path,class: 'nav-link text-light' %>
