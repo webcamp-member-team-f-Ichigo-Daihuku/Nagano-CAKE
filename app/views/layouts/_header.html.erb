@@ -20,7 +20,7 @@
             <%=  link_to "カート",cart_items_path,class: 'nav-link text-light' %>
           </li>
           <li>
-            <%= link_to "ログアウト", public_root_path, method: :delete, class: 'nav-link text-light' %>
+            <%= link_to "ログアウト", destroy_public_session_path, method: :delete, class: 'nav-link text-light' %>
           </li>
         <% else %>
           <li>
