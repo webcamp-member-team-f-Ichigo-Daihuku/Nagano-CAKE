@@ -6,10 +6,13 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+    @order = Order.new
     @cart_items = CartItem.where(public_id: current_public.id)
     @shipping_cost = 800
-    @selected_payment_method = params[:order][:payment_method]
 
+
+
+    @order.payment_method = params[:order][:payment_method]
     ary = []
     @cart_items.each do |cart_item|
       ary << cart_item.item.price*cart_item.amount
@@ -20,11 +23,16 @@ class Public::OrdersController < ApplicationController
     @address_type = params[:order][:address_type]
     case @address_type
     when "public_address"
+      @postal_code = current_public.postal_code
+      @address = current_public.address
+      @last_name = current_public.last_name
+      @first_name = current_public.first_name
+
       @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
     when "registered_address"
       unless params [:order][:registered_address_id] == ""
         selected = Address.find(params[:order][:registered_address_id])
-        @selected_address = selected.post_code + " " + selected.address + " " + selected.name
+        @selected_address = selected.postal_code + " " + selected.address + " " + selected.name
       else
         render :new
       end
@@ -51,6 +59,7 @@ class Public::OrdersController < ApplicationController
       end
       @cart_items_price = ary.sum
       @order.total_payment = @order.shipping_cost + @cart_items_price
+
       @order.payment_method = params[:order][:payment_method]
       if @order.payment_method == "credit_card"
         @order.status = 1
@@ -74,6 +83,8 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:new_address]
       @order.name = params[:order][:new_name]
       end
+
+
 
       if @order.save
         if @order.status == 0
@@ -101,5 +112,7 @@ class Public::OrdersController < ApplicationController
       @orders = Order.all
 
    end
+
+
 
 end

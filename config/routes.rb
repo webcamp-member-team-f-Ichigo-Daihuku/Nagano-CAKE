@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     get 'orders/thanks'
     resources :publicers, only: [:show, :edit, :update]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    get 'orders/thanks'
     resources :orders, only: [:new, :create, :index, :show]
       root to: 'homes#top'
     get 'homes/about' => 'homes#about',as: 'public/homes/about'

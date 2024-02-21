@@ -1,4 +1,4 @@
-<div class="ontainer p-3">
+<div class="container p-3">
  <div class="row">
   <div class="col-md-12">
 
@@ -41,7 +41,7 @@
 
     <h4>支払い方法</h4>
 
-    <% if @selected_payment_method == "credit_card" %>
+    <% if @order.payment_method == "credit_card" %>
     クレジットカード
     <% else %>
     銀行振込
@@ -51,20 +51,42 @@
     <h4>お届け先</h4>
     <%= @selected_address %>
 
-    <%= form_with url:orders_path, method: :post do %>
 
-    <%= hidden_field_tag 'order[payment_method]', @selected_payment_method %>
-    <%= hidden_field_tag 'order[address_type]', @address_type %>
 
-    <% if @address_type == "registered_address" %>
-      <%= hidden_field_tag 'order[registered_address_id]', params[:order][:registered_address_id] %>
-    <% elsif @address_type == "new_address" %>
-      <%= hidden_field_tag 'order[new_postal_code]', params[:order][:postal_code] %>
-      <%= hidden_field_tag 'order[new_address]', params[:order][:new_address] %>
-      <%= hidden_field_tag 'order[new_name]', params[:order][:new_name] %>
-      <% end %>
-      <%= submit_tag "注文を確定する", class: "btn btn-success" %>
-    <% end %>
-   </div>
-  </div>
+
+
+
+    <%= form_with model:@order, url: orders_path do |f| %>
+
+<div class="field">
+
+<%= f.label :payment_method, "支払い方法" %>
+
+<p><%= @order.payment_method_i18n %></p>
+
+<%= f.hidden_field :payment_method, value: @order.payment_method %>
+
 </div>
+
+<div class="field">
+
+<label>お届け先</label>
+
+<p>〒<%= @order.postal_code %> <br><%= @order.name %></p>
+
+<%= f.hidden_field :address_type, value: @address_type %>
+<%= f.hidden_field :postal_code, value: @postal_code %>
+
+<%= f.hidden_field :address, value: @address %>
+
+<%= f.hidden_field :name, value: @order.name %>
+
+</div>
+
+<div class="actions text-center">
+
+<%= f.submit "注文を確定する", class: "btn btn-primary submit_to_create_order" %>
+
+</div>
+
+<% end %>
