@@ -6,10 +6,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+    @order = Order.new
     @cart_items = CartItem.where(public_id: current_public.id)
     @shipping_cost = 800
-    @selected_payment_method = params[:order][:pey_method]
 
+
+    @order.payment_method = params[:order][:payment_method]
     ary = []
     @cart_items.each do |cart_item|
       ary << cart_item.item.price*cart_item.amount
@@ -20,11 +22,16 @@ class Public::OrdersController < ApplicationController
     @address_type = params[:order][:address_type]
     case @address_type
     when "public_address"
-      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.family_name + current_public.first_name
+      @postal_code = current_public.postal_code
+      @address = current_public.address
+      @last_name = current_public.last_name
+      @first_name = current_public.first_name
+
+      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
     when "registered_address"
       unless params [:order][:registered_address_id] == ""
         selected = Address.find(params[:order][:registered_address_id])
-        @selected_address = selected.post_code + " " + selected.address + " " + selected.name
+        @selected_address = selected.postal_code + " " + selected.address + " " + selected.name
       else
         render :new
       end
@@ -50,8 +57,9 @@ class Public::OrdersController < ApplicationController
         ary << cart_item.item.price*cart_item.amount
       end
       @cart_items_price = ary.sum
-      @order.total_price = @order.shipping_cost + @cart_items_price
-      @order.payment_method = params[:order][:pay_method]
+      @order.total_payment = @order.shipping_cost + @cart_items_price
+
+      @order.payment_method = params[:order][:payment_method]
       if @order.payment_method == "credit_card"
         @order.status = 1
       else
@@ -61,9 +69,9 @@ class Public::OrdersController < ApplicationController
       address_type = params[:order][:address_type]
       case address_type
       when "public_address"
-      @order.post_code = current_public.post_code
+      @order.postal_code = current_public.postal_code
       @order.address = current_public.address
-      @order.name = current_public.family_name + current_public.first_name
+      @order.name = current_public.last_name + current_public.first_name
       when "registered_address"
       selected = Address.find(params[:order][:registered_address_id])
       @order.postal_code = selected.postal_code
@@ -74,6 +82,8 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:new_address]
       @order.name = params[:order][:new_name]
       end
+
+
 
       if @order.save
         if @order.status == 0
@@ -86,7 +96,7 @@ class Public::OrdersController < ApplicationController
           end
         end
         @cart_items.destroy_all
-        redirect_to complete_orders_path
+        redirect_to public_orders_thanks_path
       else
         render :new
       end
@@ -101,5 +111,7 @@ class Public::OrdersController < ApplicationController
       @orders = Order.all
 
    end
-  
+
+
+
 end
