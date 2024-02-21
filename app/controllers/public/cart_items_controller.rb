@@ -1,7 +1,7 @@
 class Public::CartItemsController < ApplicationController
   def index
     @cart_items = CartItem.all
-    @totle = 0
+    @total = 0
   end
 
   def update

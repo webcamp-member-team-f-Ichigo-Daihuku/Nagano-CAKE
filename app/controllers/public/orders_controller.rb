@@ -101,4 +101,5 @@ class Public::OrdersController < ApplicationController
       @orders = Order.all
 
    end
+  
 end
