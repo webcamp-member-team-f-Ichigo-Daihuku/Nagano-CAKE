@@ -18,7 +18,7 @@
          <td><%= order.public.last_name %><%= order.public.first_name %></td>
            <td><%= order.cart_items.amount(:quantity) %></td>
          <td><%= order.status_i18n %></td>
-         
+
        </tr>
       <% end %>
       <%= paginate orders %>

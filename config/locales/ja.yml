@@ -1,7 +1,7 @@
  ja:
   enums:
     order:
-      order_status:
+      status:
         wait_payment: '入金待ち'
         confirm_payment: '入金確認'
         making: '製作中'
