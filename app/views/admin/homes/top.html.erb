@@ -12,16 +12,16 @@
       </tr>
     </thead>
     <tbody>
-      <% orders.each do |order| %>
+      <% @orders.each do |order| %>
        <tr>
-         <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M"), admin_order_path(@order) %></td>
-         <td><%= order.public.last_name %><%= order.public.first_name %></td>
-           <td><%= order.cart_items.amount(:quantity) %></td>
+         <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M"), admin_order_path(order.id) %></td>
+         <td><%= order.public.last_name %> <%= order.public.first_name %></td>
+           <td><%= order.cart_items.sum(:amount) %></td>
          <td><%= order.status_i18n %></td>
-         
+
        </tr>
       <% end %>
-      <%= paginate orders %>
+      <%= paginate @orders %>
     </tbody>
   </table>
 </div>
