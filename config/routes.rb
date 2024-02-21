@@ -36,9 +36,9 @@ Rails.application.routes.draw do
     patch  '/publicers/withdraw' => 'publicers#withdraw'
     resources :publicers, only: [:show, :edit, :update]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    get 'orders/thanks'
     resources :orders, only: [:new, :create, :index, :show]
     post 'orders/confirm'
-    get 'orders/thanks'
       root to: 'homes#top'
     get 'homes/about' => 'homes#about',as: 'public/homes/about'
 
