@@ -30,9 +30,9 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def reject_public
-    @publicer = Public.find_by(email: params[:publics][:email])
+    @publicer = Public.find_by(email: params[:public][:email])
     if @publicer
-      if @publicer.valid_password?(params[:publics][:password]) && (@publicer.is_active == false)
+      if @publicer.valid_password?(params[:public][:password]) && (@publicer.is_active == false)
         flash[:notice] = "退会済みです。再度ご登録をしてご利用ください"
         redirect_to new_public_registration_path
       else

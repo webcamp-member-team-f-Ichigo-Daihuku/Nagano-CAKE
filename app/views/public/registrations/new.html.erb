@@ -3,7 +3,7 @@
     <div class="col">
       <h4 class="my-5">新規会員登録</h4>
       <table class="table table-borderless">
-        <%= form_with model: @public, url: public_registration_path do |f| %>
+        <%= form_with model: Public.new, url: public_registration_path do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
         <tr>
           <td>名前</td>
