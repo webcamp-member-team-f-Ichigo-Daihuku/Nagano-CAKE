@@ -3,7 +3,6 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @addresses = current_public.adresses.all
   end
 
   def confirm
