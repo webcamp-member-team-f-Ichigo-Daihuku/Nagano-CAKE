@@ -34,11 +34,11 @@ Rails.application.routes.draw do
   namespace :public do
     get  '/publicers/check' => 'publicers#check'
     patch  '/publicers/withdraw' => 'publicers#withdraw'
+    post 'orders/confirm'
+    get 'orders/thanks'
     resources :publicers, only: [:show, :edit, :update]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show]
-    post 'orders/confirm'
-    get 'orders/thanks'
       root to: 'homes#top'
     get 'homes/about' => 'homes#about',as: 'public/homes/about'
 
