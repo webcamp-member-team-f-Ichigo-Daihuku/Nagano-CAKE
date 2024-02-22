@@ -12,7 +12,7 @@ class Public::OrdersController < ApplicationController
     @order.payment_method = params[:order][:payment_method]
     ary = []
     @cart_items.each do |cart_item|
-      ary << cart_item.item.price*cart_item.amount
+      ary << cart_item.item.with_tax_price*cart_item.amount
     end
     @cart_items_price = ary.sum
     @total_price = @shipping_cost + @cart_items_price
@@ -98,6 +98,10 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
     # @order_details = OrderDetail.where(order_id: @order.id)
+  end
+  
+  def miss
+    redirect_to new_order_path
   end
 
   def show
