@@ -12,7 +12,7 @@
         <% @cart_items.each do |cart_item| %>
           <tr>
             <td>
-              <%= image_tag cart_item.item.image, size: "100x80" %>
+              <%= image_tag cart_item.item.item_image, size: "100x80" %>
               <strong><%= cart_item.item.name %></strong>
             </td>
             <td><%= cart_item.item.price %></td>

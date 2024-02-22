@@ -1,6 +1,6 @@
  ja:
   enums:
-    order_details:
+    order_detail:
       making_status:
         impossible_manufacture: '製作不可'
         waiting_manufacture: '製作待ち'
