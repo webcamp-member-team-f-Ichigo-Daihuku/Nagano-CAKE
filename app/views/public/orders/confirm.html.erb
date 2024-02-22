@@ -12,12 +12,12 @@
         <% @cart_items.each do |cart_item| %>
           <tr>
             <td>
-              <%= image_tag cart_item.item.item_image, size: "100x80" %>
+              <%= image_tag cart_item.item.item_image, size: "50x50" %>
               <strong><%= cart_item.item.name %></strong>
             </td>
-            <td><%= cart_item.item.price %></td>
+            <td><%= number_with_delimiter(cart_item.item.with_tax_price, delimiter: ',') %></td>
             <td><%= cart_item.amount %></td>
-            <td><%= cart_item.item.price*cart_item.amount %></td>
+            <td><%= number_with_delimiter(cart_item.item.with_tax_price * cart_item.amount, delimiter: ',') %></td>
           </tr>
         <% end %>
       </table>
@@ -28,11 +28,11 @@
         </tr>
         <tr>
           <td>商品合計</td>
-          <td><%= @cart_items_price %></td>
+          <td><%= number_with_delimiter(@cart_items_price, delimiter: ',') %></td>
         </tr>
         <tr>
           <td>請求額</td>
-          <td><%= @total_price %></td>
+          <td><%= number_with_delimiter( @total_price_price, delimiter: ',') %></td>
         </tr>
       </table>
       <h4>支払い方法</h4>

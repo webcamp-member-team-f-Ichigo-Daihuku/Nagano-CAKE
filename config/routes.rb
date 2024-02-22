@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
   get 'public/items'
+  post 'public/orders/confirm' => 'public/orders#confirm'
+  get 'public/orders/confirm' => 'public/orders#miss'
   scope module: :public do
     root to: 'homes#top'
     get 'homes/about' => 'homes#about',as: 'public/homes/about'
+
     resources :orders,only: [:new, :create, :index, :show]
     resources :items,only: [:index, :show]
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       delete :destroy_all, on: :collection
     end
-    post 'orders/confirm'
+
     get 'orders/thanks'
   end
 
