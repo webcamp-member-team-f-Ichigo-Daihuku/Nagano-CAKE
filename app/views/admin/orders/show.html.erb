@@ -4,7 +4,8 @@
   <table>
     <tr>
       <th>購入者</th>
-      <th><%= @order.public.name %></th>
+      <th><%#= @order.public.name %></th>
+      <th><%= @order.public.last_name %> <%= @order.public.first_name %></th>
     </tr>
     <tr>
       <th>注文日</th>
@@ -20,14 +21,13 @@
     </tr>
     <tr>
       <th>注文ステータス</th>
-      <th>
-        <%= form_with(model: @order, url: admins_order_path, local: true, class: "form-row") do |f| %>
-          <%= f.select :order_status, Order.order_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6"  %>
-          <%= f.submit "更新" %>
-        <% end %>
-      </th>
     </tr>
   </table>
+
+  <%= form_with(model: @order, url: admin_order_path, method: :patch, local: true, class: "form-row") do |f| %>
+    <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6"  %>
+    <%= f.submit "更新" %>
+  <% end %>
 
   <table class="table">
     <thead class="table-light">
