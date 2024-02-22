@@ -3,36 +3,54 @@
     <div class = "col-md-2 offset-md-1">
       <%= render 'admin/genres/searth', genres: @genres %>
     </div>
-    <%= form_with model: @cart_item, url: cart_items_path do |f| %>
-    <div class="form-group">
-      <div class="field">
-        <%= image_tag @item.get_item_image(500,500) %>
-      </div>
-      <div class="field">
-        <%= @item.name %>
-      </div>
-      <div class="area">
-        <%= @item.introduction %>
-      </div>
-      <div class="field">
-        ¥<%= @item.with_tax_price %>(税込)
-      </div>
-      <% if signed_in? %>
-        <% if @item.is_active == true %>
-          <div class="field">
-            <%= f.hidden_field :item_id,value: @item.id %>
-            <%= f.select :amount, *[1..10],selected: 1 %>
-          </div>
-          <div class="actions mx-auto">
-            <%= f.submit "カートに入れる", class: "btn btn-success" %>
-          </div>
-        <% else %>
-          <span class="text-muted"><strong>販売停止中</strong></span>
-        <% end %>
-      <% else %>
-        <%= link_to "ログイン", new_public_session_path %>
-      <% end %>
-    </div>
+    
+    <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+    <div class = "col-md-9">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <%= image_tag @item.get_item_image(250,250) %>
+            </th>
+          </tr>
+        </thead>
+      </table>
+      <table>
+        <tbody>
+          <tr>
+            <h4><strong><%= @item.name %></strong></h4><br>
+          </tr>
+          <tr>
+            <h5><%= @item.introduction %></h5><br>
+          </tr>
+          <tr>
+            <h4>
+              ¥<%= number_with_delimiter(@item.with_tax_price, delimiter: ',') %>
+              <span style="font-size: 50%;">(税込)</span>
+            </h4><br>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <tbody>
+          <tr>
+            <% if signed_in? %>
+              <% if @item.is_active == true %>
+                <th>
+                  <%= f.hidden_field :item_id,value: @item.id %>
+                  <%= f.select :amount, *[1..10],selected: 1 %>
+                </th>
+                  <th><%= f.submit "カートに入れる", class: "btn btn-success" %></th>
+              <% else %>
+                <th class="text-muted"><strong>販売停止中</strong></th>
+              <% end %>
+            <% else %>
+              <th></th>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
     <% end %>
+    </div>
   </div>
 </div>

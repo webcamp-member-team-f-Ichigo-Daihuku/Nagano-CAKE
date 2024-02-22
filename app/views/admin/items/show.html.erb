@@ -15,7 +15,7 @@
     <td><%= @item.name %></td><br>
     <td><%= @item.introduction %></td><br>
     <td><%= @item.genre.name %></td><br>
-    <td><%= @item.with_tax_price%>（<%= @item.price %>）円</td><br>
+    <td><%= number_with_delimiter(@item.with_tax_price, delimiter: ',') %>（<%= number_with_delimiter(@item.price, delimiter: ',') %>）円</td><br>
     <td>
       <% if @item.is_active == true %>
         <span class="text-success"><strong>販売中</strong></span>
