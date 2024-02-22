@@ -32,7 +32,7 @@
               <th><%= item.name %></<th>
             </tr>
             <tr>
-            <th>¥<%= item.with_tax_price%></th>
+            <th>¥<%= number_with_delimiter(item.with_tax_price, delimiter: ',') %></th>
             </tr>
           <% end %>
         </thead>
