@@ -1,5 +1,11 @@
  ja:
   enums:
+    order_details:
+      making_status:
+        impossible_manufacture: '製作不可'
+        waiting_manufacture: '製作待ち'
+        manufacturing: '製作中'
+        finish: '製作完了'
     order:
       status:
         wait_payment: '入金待ち'
