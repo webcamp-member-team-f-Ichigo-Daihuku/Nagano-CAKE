@@ -13,10 +13,10 @@
   <%= link_to "カートを空にする",destroy_all_cart_items_path, method: :delete, class: "btn btn-sm btn-danger" %>
   <% @cart_items.each do |cart_item| %>
     <tr>
-      <td><%= image_tag cart_item.item.get_item_image(50,50) %></td>
+      <td><%= image_tag cart_item.item.item_image.get_item_image(50,50) %></td>
       <td><%= cart_item.item.name %></td>
       <td><%= cart_item.item.with_tax_price %></td>
-    </tr> 
+    </tr>
   </tbody>
   </table>
   <table>
@@ -36,7 +36,7 @@
   </tbody>
   <th><%= link_to "買い物を続ける",root_path, class: "btn btn-sm btn-primary" %></th>
   <th>合計金額</th>
-  <th><%= @total%></th>
+  <th><%= @total %></th>
   <th>
     <% if @cart_items.empty? %>
       <th></th>
