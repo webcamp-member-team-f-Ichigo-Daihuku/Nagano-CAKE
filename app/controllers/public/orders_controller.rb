@@ -20,7 +20,7 @@ class Public::OrdersController < ApplicationController
     @address_type = params[:order][:address_type]
     case @address_type
     when "public_address"
-      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.family_name + current_public.first_name
+      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
     when "registered_address"
       unless params [:order][:registered_address_id] == ""
         selected = Address.find(params[:order][:registered_address_id])
@@ -101,5 +101,5 @@ class Public::OrdersController < ApplicationController
       @orders = Order.all
 
    end
-  
+
 end
