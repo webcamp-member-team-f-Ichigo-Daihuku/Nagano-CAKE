@@ -3,9 +3,5 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details= OrderDetail.where(order_id: @order.id)
   end
-  
-  def update
-    
-  end
 end
 
