@@ -3,8 +3,9 @@
     <div class = "col-md-2 offset-md-1">
       <%= render 'admin/genres/searth', genres: @genres %>
     </div>
-    <div class = "col-md-3">
-    <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+    
+    <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+    <div class = "col-md-9">
       <table>
         <thead>
           <tr>
@@ -14,8 +15,6 @@
           </tr>
         </thead>
       </table>
-    </div>
-    <div class = "col-md-6">
       <table>
         <tbody>
           <tr>
@@ -37,15 +36,16 @@
           <tr>
             <% if signed_in? %>
               <% if @item.is_active == true %>
-              <th>
-                <%= f.hidden_field :item_id,value: @item.id %>
-                <%= f.select :amount, *[1..10],selected: 1 %>
-                <%= f.submit "カートに入れる", class: "btn btn-success" %></th>
+                <th>
+                  <%= f.hidden_field :item_id,value: @item.id %>
+                  <%= f.select :amount, *[1..10],selected: 1 %>
+                </th>
+                  <th><%= f.submit "カートに入れる", class: "btn btn-success" %></th>
               <% else %>
                 <th class="text-muted"><strong>販売停止中</strong></th>
               <% end %>
             <% else %>
-              <th><%= link_to "ログイン", new_public_session_path %><th>
+              <th></th>
             <% end %>
           </tr>
         </tbody>

@@ -38,6 +38,10 @@
   <th>合計金額</th>
   <th><%= @total%></th>
   <th>
-    <%= link_to "入力画面に進む",new_order_path, class: "btn btn-sm btn-success" %>
+    <% if @cart_items.empty? %>
+      <th></th>
+    <% else %>
+      <%= link_to "入力画面に進む",new_order_path, class: "btn btn-sm btn-success" %>
+    <% end %>
   </th>
 </table>
