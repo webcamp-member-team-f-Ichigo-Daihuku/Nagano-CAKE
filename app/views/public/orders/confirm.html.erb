@@ -16,24 +16,24 @@
               <%= image_tag cart_item.item.item_image, size: "50x50" %>
               <strong><%= cart_item.item.name %></strong>
             </td>
-            <td><%= number_with_delimiter(cart_item.item.with_tax_price, delimiter: ',') %></td>
+            <td>¥<%= number_with_delimiter(cart_item.item.with_tax_price, delimiter: ',') %></td>
             <td><%= cart_item.amount %></td>
-            <td><%= number_with_delimiter(cart_item.item.with_tax_price * cart_item.amount, delimiter: ',') %></td>
+            <td>¥<%= number_with_delimiter(cart_item.item.with_tax_price * cart_item.amount, delimiter: ',') %></td>
           </tr>
         <% end %>
       </table>
       <table class="table">
         <tr>
           <td>送料</td>
-          <td><%= @shipping_cost %></td>
+          <td>¥<%= @shipping_cost %></td>
         </tr>
         <tr>
           <td>商品合計</td>
-          <td><%= number_with_delimiter(@cart_items_price, delimiter: ',') %></td>
+          <td>¥<%= number_with_delimiter(@cart_items_price, delimiter: ',') %></td>
         </tr>
         <tr>
           <td>請求額</td>
-          <td><%= number_with_delimiter( @total_price, delimiter: ',') %></td>
+          <td>¥<%= number_with_delimiter( @total_price, delimiter: ',') %></td>
         </tr>
       </table>
       <h4>〈支払い方法〉</h4>
@@ -47,21 +47,11 @@
       <h4>〈お届け先〉</h4>
       <%= @selected_address %>
       <%= form_with model: @order, url: orders_path do |f| %>
-        <div class="field">
-          <%= f.label :payment_method, "支払い方法" %>
-          <p><%= @order.payment_method_i18n %></p>
-          <%= f.hidden_field :payment_method, value: @order.payment_method %>
-        </div>
-
-          <div class="field">
-            <label>お届け先</label>
-            <p>〒<%= @order.postal_code %> <br><%= @order.name %></p>
-            <%= f.hidden_field :address_type, value: @address_type %>
-            <%= f.hidden_field :postal_code, value: @postal_code %>
-            <%= f.hidden_field :address, value: @address %>
-            <%= f.hidden_field :name, value: @order.name %>
-
-        </div>
+      
+      
+      
+      
+        
         <div class="actions text-center">
           <%= f.submit "注文を確定する", class: "btn btn-primary submit_to_create_order" %>
         </div>

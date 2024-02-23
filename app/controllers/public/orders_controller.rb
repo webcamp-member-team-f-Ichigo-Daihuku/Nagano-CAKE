@@ -23,17 +23,17 @@ class Public::OrdersController < ApplicationController
       @address = current_public.address
       @last_name = current_public.last_name
       @first_name = current_public.first_name
-      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
+      @selected_address = current_public.postal_code + " " + current_public.address + "" + current_public.last_name + current_public.first_name
     when "registered_address"
       unless params [:order][:registered_address_id] == ""
         selected = Address.find(params[:order][:registered_address_id])
-        @selected_address = selected.postal_code + " " + selected.address + " " + selected.name
+        @selected_address = selected.postal_code + " " + selected.address + "" + selected.name
       else
         render :new
       end
     when "new_address"
       unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
-        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + " " + params[:order][:new_name]
+        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + "" + params[:order][:new_name]
       else
         render :new
       end
@@ -95,15 +95,15 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-  
+
     def index
       @orders = Order.page(params[:page]).per(10)
       @order_details = OrderDetail.all
     end
-    
+
     # @order_details = OrderDetail.where(order_id: @order.id)
 
-  
+
   def miss
     redirect_to new_order_path
   end
