@@ -96,8 +96,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
-    # @order_details = OrderDetail.where(order_id: @order.id)
+    @orders = Order.page(params[:page]).per(10)
+    @order_details = OrderDetail.all
   end
   
   def miss
