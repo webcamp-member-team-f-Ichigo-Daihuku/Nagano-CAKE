@@ -97,6 +97,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+    
     # @order_details = OrderDetail.where(order_id: @order.id)
   end
   

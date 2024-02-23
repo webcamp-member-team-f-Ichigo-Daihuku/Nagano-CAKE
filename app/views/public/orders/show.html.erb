@@ -29,7 +29,9 @@
     <table class="table">
       <tr>
         <td>商品合計</td>
-        <td><%= @order.total_payment %></td>
+        <td>
+        <% sum = @order.order_details.sum { |order_detail| order_detail.amount * order_detail.item.price } %>
+    <%= sum %></td>
       </tr>
       <tr>
         <td>配送料</td>
@@ -37,7 +39,7 @@
       </tr>
       <tr>
         <td>ご請求額</td>
-        <td><%= @order.total_payment + @order.shipping_cost %></td>
+      <td><%= sum + @order.shipping_cost %></td>
       </tr>
     </table>
 
