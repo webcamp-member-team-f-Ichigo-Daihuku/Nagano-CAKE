@@ -1,0 +1,35 @@
+<div class = "container px-5 px-sm-0">
+  <div class = "row">
+    <div class = "col-md-2 offset-md-1">
+      <%= render 'admin/genres/searth', genres: @genres %>
+    </div>
+    <div class = "col-md-9">
+      <table>
+        <thead>
+          <h2><strong>商品一覧</strong></h2>
+          <th>全<%= @items_count %>件</th>
+        </thead>
+      </table>
+      <strong><table class = "mt-3">
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <th>
+              <%= link_to item_path(item) do %>
+                <%= image_tag item.get_item_image(100, 100) %>
+              <% end %>
+            </th>
+          </tr>
+          <tr>
+            <td><%= item.name %></td>
+          </tr>
+          <tr>
+            <td>¥<%= number_with_delimiter(item.with_tax_price, delimiter: ',') %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table></strong>
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>

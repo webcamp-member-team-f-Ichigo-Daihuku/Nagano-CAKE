@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# Admin.create!(
-#   email: "a@a",
-#   password: "aaaaaa"
-#   )
+Admin.create!(
+   email: "a@a",
+   password: "aaaaaa"
+   )
 
 # 20.times do |n|
 #   Public.create!(
