@@ -1,6 +1,4 @@
-
 <h2>注文履歴一覧</h2>
-
 <div class="container">
   <table class="table-bordered">
     <thead>
@@ -16,9 +14,8 @@
        <tr>
          <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M"), admin_order_path(order.id) %></td>
          <td><%= order.public.last_name %> <%= order.public.first_name %></td>
-           <td><%= order.cart_items.sum(:amount) %></td>
+           <td><%= order.order_details.sum(:amount) %></td>
          <td><%= order.status_i18n %></td>
-
        </tr>
       <% end %>
       <%= paginate @orders %>

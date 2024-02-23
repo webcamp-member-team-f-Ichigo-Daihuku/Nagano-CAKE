@@ -2,7 +2,7 @@
 <table>
 <thead>
   <tr>
-    <th><%= image_tag @item.get_item_image(500,500) %></th><br>
+    <th><%= image_tag @item.get_item_image(300,300) %></th><br>
     <th>商品名</th><br>
     <th>商品説明</th><br>
     <th>ジャンル</th><br>
@@ -15,7 +15,7 @@
     <td><%= @item.name %></td><br>
     <td><%= @item.introduction %></td><br>
     <td><%= @item.genre.name %></td><br>
-    <td><%= @item.with_tax_price%>（<%= @item.price %>）円</td><br>
+    <td><%= number_with_delimiter(@item.with_tax_price, delimiter: ',') %>（<%= number_with_delimiter(@item.price, delimiter: ',') %>）円</td><br>
     <td>
       <% if @item.is_active == true %>
         <span class="text-success"><strong>販売中</strong></span>

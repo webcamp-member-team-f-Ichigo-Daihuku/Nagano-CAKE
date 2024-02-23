@@ -15,8 +15,8 @@
     <tr>
       <td><%= image_tag cart_item.item.get_item_image(50,50) %></td>
       <td><%= cart_item.item.name %></td>
-      <td><%= cart_item.item.with_tax_price %></td>
-    </tr> 
+      <td><%= number_with_delimiter(cart_item.item.with_tax_price, delimiter: ',') %></td>
+    </tr>
   </tbody>
   </table>
   <table>
@@ -28,7 +28,7 @@
         <%= f.submit "変更", class: "btn btn-success" %>
       <% end %>
       </td>
-      <td><%= cart_item.subtotal %></td>
+      <td><%= number_with_delimiter(cart_item.subtotal, delimiter: ',') %></td>
       <% @total = @total + cart_item.subtotal %>
       <td><%= link_to "削除する",cart_item_path(cart_item.id), method: :delete, class: "btn btn-sm btn-danger" %></td>
     </tr>
@@ -36,8 +36,12 @@
   </tbody>
   <th><%= link_to "買い物を続ける",root_path, class: "btn btn-sm btn-primary" %></th>
   <th>合計金額</th>
-  <th><%= @total%></th>
+  <th><%= number_with_delimiter(@total, delimiter: ',') %></th>
   <th>
-    <%= link_to "入力画面に進む",new_order_path, class: "btn btn-sm btn-success" %>
+    <% if @cart_items.empty? %>
+      <th></th>
+    <% else %>
+      <%= link_to "入力画面に進む",new_order_path, class: "btn btn-sm btn-success" %>
+    <% end %>
   </th>
 </table>
