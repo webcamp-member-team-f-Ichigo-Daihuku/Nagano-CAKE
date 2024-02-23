@@ -99,7 +99,7 @@ class Public::OrdersController < ApplicationController
     @orders = Order.page(params[:page]).per(10)
     @order_details = OrderDetail.all
   end
-  
+
   def miss
     redirect_to new_order_path
   end
