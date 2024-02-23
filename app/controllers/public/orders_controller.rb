@@ -95,11 +95,14 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-  def index
-    @orders = Order.all
+  
+    def index
+      @orders = Order.page(params[:page]).per(10)
+      @order_details = OrderDetail.all
+    end
     
     # @order_details = OrderDetail.where(order_id: @order.id)
-  end
+
   
   def miss
     redirect_to new_order_path
