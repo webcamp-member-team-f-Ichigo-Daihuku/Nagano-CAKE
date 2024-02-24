@@ -19,21 +19,20 @@ class Public::OrdersController < ApplicationController
     @address_type = params[:order][:address_type]
     case @address_type
     when "public_address"
-      @postal_code = current_public.postal_code
-      @address = current_public.address
-      @last_name = current_public.last_name
-      @first_name = current_public.first_name
-      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
+      @order.postal_code = current_public.postal_code
+      @order.address = current_public.address
+      @order.name = current_public.last_name + " " + current_public.first_name
+      @selected_address = current_public.postal_code + " " + current_public.address + "" + current_public.last_name + current_public.first_name
     when "registered_address"
       unless params [:order][:registered_address_id] == ""
         selected = Address.find(params[:order][:registered_address_id])
-        @selected_address = selected.postal_code + " " + selected.address + " " + selected.name
+        @selected_address = selected.postal_code + " " + selected.address + "" + selected.name
       else
         render :new
       end
     when "new_address"
       unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
-        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + " " + params[:order][:new_name]
+        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + "" + params[:order][:new_name]
       else
         render :new
       end
@@ -44,7 +43,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new
+    @order = Order.new(order_params)
+    #binding.pry
     @order.public_id = current_public.id
     @order.shipping_cost = 800
     @cart_items = CartItem.where(public_id: current_public.id)
@@ -78,7 +78,7 @@ class Public::OrdersController < ApplicationController
     @order.name = params[:order][:new_name]
     end
 
-    if @order.save
+    if @order.save!
       if @order.status == 0
         @cart_items.each do |cart_item|
           OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price,amount: cart_item.amount, making_status: 0)
@@ -95,15 +95,15 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-  
+
     def index
       @orders = Order.page(params[:page]).per(10)
       @order_details = OrderDetail.all
     end
-    
+
     # @order_details = OrderDetail.where(order_id: @order.id)
 
-  
+
   def miss
     redirect_to new_order_path
   end
@@ -113,4 +113,9 @@ class Public::OrdersController < ApplicationController
     @order_details = OrderDetail.where(order_id: @order.id)
   end
 
+  private
+
+  def order_params
+  params.require(:order).permit(:payment_method, :public_id, :shipping_cost, :total_payment, :status, :address_type, :postal_code, :address, :name, :address_type, :registrated_address_id, :new_postal_code, :new_address, :new_name)
+  end
 end

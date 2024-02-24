@@ -29,17 +29,16 @@
     <table class="table">
       <tr>
         <td>商品合計</td>
-        <td>
-        <% sum = @order.order_details.sum { |order_detail| order_detail.amount * order_detail.item.price } %>
-    <%= sum %></td>
+       <% sum = @order.order_details.sum { |order_detail| (order_detail.amount * order_detail.item.price * 1.1).floor.to_i } %>
+<td>¥<%= number_with_delimiter(sum, delimiter: ',') %></td>
       </tr>
       <tr>
         <td>配送料</td>
-        <td><%= @order.shipping_cost %></td>
+        <td>¥<%= @order.shipping_cost %></td>
       </tr>
       <tr>
         <td>ご請求額</td>
-      <td><%= sum + @order.shipping_cost %></td>
+      <td>¥<%= sum + @order.shipping_cost %></td>
       </tr>
     </table>
 
@@ -54,9 +53,9 @@
       <% @order_details.each do |order_detail| %>
         <tr>
           <td><%= order_detail.item.name %></td>
-          <td><%= order_detail.item.price %></td>
+          <td>¥<%= number_with_delimiter((order_detail.item.price * 1.1).floor.to_i, delimiter: ',') %></td>
           <td><%= order_detail.amount %></td>
-          <td><%= order_detail.amount * order_detail.item.price %></td>
+          <td>¥<%= number_with_delimiter(((order_detail.amount * order_detail.item.price) * 1.1).floor.to_i, delimiter: ',') %></td>
         </tr>
       <% end %>
     </table>
