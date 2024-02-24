@@ -61,6 +61,27 @@
     </tbody>
     <% end %>
   </table>
+  <div class = "row">
+    <div class = "col-md-3">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>商品合計</td>
+        <% sum = @order.order_details.sum { |order_detail| (order_detail.amount * order_detail.item.price * 1.1).floor.to_i } %>
+        <td>¥<%= number_with_delimiter(sum, delimiter: ',') %></td>
+      </tr>
+      <tr>
+        <td>配送料</td>
+        <td>¥<%= @order.shipping_cost %></td>
+      </tr>
+      <tr>
+        <td>ご請求額</td>
+      <td>¥<%= number_with_delimiter(sum + @order.shipping_cost, delimiter: ',') %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
 </div>
 </div>
 </div>
