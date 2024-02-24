@@ -10,15 +10,22 @@ class Public::AddressesController < ApplicationController
   end
 
   def create
-    @addresss = Address.new(address_params)
+    @address = Address.new(addresses_params)
     @address.public_id = current_public.id
-    @address.save
+
+    if @address.save
     redirect_to public_addresses_path
+    else
+    @addresses = Address.all
+    # エラーハンドリングの処理を追加する場合はここに記述する
+    render :index
+    end
+
   end
 
   def update
     @address = Address.find(params[:id])
-    if @address.update(address_params)
+    if @address.update(addresses_params)
       redirect_to public_addresses_path
     else
       render :edit
@@ -34,7 +41,7 @@ class Public::AddressesController < ApplicationController
   private
 
   def addresses_params
-    params.require(:addresses).permit(:address, :postal_code, :name)
+    params.require(:address).permit(:address, :postal_code, :name)
   end
 
 end

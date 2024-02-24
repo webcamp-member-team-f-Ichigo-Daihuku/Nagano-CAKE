@@ -40,9 +40,9 @@
     <tbody>
       <% @order_details.each do |order_detail| %>
       <td><%= order_detail.item.name %></td>
-      <td><%= number_with_delimiter((order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
+      <td>¥<%= number_with_delimiter((order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
       <td><%= order_detail.amount %></td>
-      <td><%= number_with_delimiter((order_detail.amount * order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
+      <td>¥<%= number_with_delimiter((order_detail.amount * order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
       <td>
         <%= form_with(model: order_detail, url: admin_order_detail_path, method: :patch, local: true, class: "form-row") do |f| %>
           <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6" %>
