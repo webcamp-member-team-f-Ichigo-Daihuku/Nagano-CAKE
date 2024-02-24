@@ -2,29 +2,29 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 
-  <h2>配送先編集</h2>
+  <h3 class="address"><strong>配送先編集</strong> <i class="fa-solid fa-pen-to-square"></i></h3>
     <%= form_with(model: @address, url: public_address_path) do |f| %>
-     <div class="form-group">
+     <div class="form-group address">
       <label for="inputPostal_code">郵便番号(ハイフンなし)</label>
       <%= f.text_field :postal_code, autofocus: true, id:"inputPostal_code" %>
       </div>
 
-      <div class="form-group">
+      <div class="form-group address">
        <label for="inputAddress">住所</label>
       <%= f.text_field :address, autofocus: true, id:"inputAddress" %>
       </div>
-      
-      <div class="form-group">
+
+      <div class="form-group address">
        <label for="inputName">宛名</label>
       <%= f.text_field :name, autofocus: true, id:"inputName" %>
       </div>
-      
-      <div class="form-group">
-  <%= f.submit "変更内容を保存", class:"btn btn-success" %>    
+
+      <div class="form-group address">
+  <%= f.submit "変更内容を保存", class:"btn btn-success" %>
       </div>
     <% end %>
 
-      
+
 
     </div>
   </div>
