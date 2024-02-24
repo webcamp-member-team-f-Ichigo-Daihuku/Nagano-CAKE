@@ -1,6 +1,6 @@
 class Public::ItemsController < ApplicationController
   def index
-    @items = Item.page(params[:page]).per(10)
+    @items = Item.page(params[:page]).per(8)
     @items_count = Item.count
     @genres = Genre.all
   end
@@ -8,7 +8,7 @@ class Public::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @genres = Genre.all
-    @cart_item =CartItem.new
+    @cart_item = CartItem.new
   end
 
   private
