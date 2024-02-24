@@ -20,17 +20,19 @@
       <table>
         <thead>
           <h4 class = "mt-3"><strong>新着商品</strong></h4>
+          <% @items.each_slice(4) do |row| %>
           <tr>
-            <% @items.each do |item| %>
-              <th style="width: 25%;">
-                <%= link_to item_path(item) do %>
-                  <%= image_tag item.get_item_image(150,150) %>
-                <% end %><br>
-                <%= item.name %><br>
-                ¥<%= number_with_delimiter(item.with_tax_price, delimiter: ',') %>
-              </th>
+            <% row.each do |item| %>
+            <th>
+              <%= link_to item_path(item) do %>
+                <%= image_tag item.get_item_image(150,150) %>
+              <% end %><br>
+              <%= item.name %><br>
+              ¥<%= number_with_delimiter(item.with_tax_price, delimiter: ',') %>
+            </th>
             <% end %>
           </tr>
+          <% end %>
         </thead>
       </table>
       <div class = "text-right">
