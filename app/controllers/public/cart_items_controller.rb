@@ -26,25 +26,26 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-  @cart_item = CartItem.new(cart_item_params)
-  @cart_item.public_id = current_public.id
-
-  if params[:cart_item][:amount].to_i <= 0
+    @cart_item = CartItem.new(cart_item_params)
+    @cart_item.public_id = current_public.id
+    if params[:cart_item][:amount].to_i <= 0
     flash[:error] = "個数を選択してください"
     redirect_to cart_items_path and return
-  else
-    if CartItem.find_by(item_id: params[:cart_item][:item_id]).present?
-      cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
-      cart_item.amount += params[:cart_item][:amount].to_i
-      cart_item.update(amount: cart_item.amount)
     else
-      @cart_item.save
+      if CartItem.find_by(item_id: params[:cart_item][:item_id]).present?
+        cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
+        cart_item.amount += params[:cart_item][:amount].to_i
+        if cart_item.amount >= 10
+          cart_item.amount = 10
+        end
+        cart_item.update(amount: cart_item.amount)
+      else
+        @cart_item.save
+      end
+      flash[:error] = "一度に各商品１０個までご購入いただけます"
+      redirect_to cart_items_path
     end
-
-    redirect_to cart_items_path
   end
-end
-
 
   private
 

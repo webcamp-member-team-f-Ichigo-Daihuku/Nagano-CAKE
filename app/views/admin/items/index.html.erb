@@ -1,19 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <div class="row">
-        <div class="col-6">
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-8 mx-auto">
+      <div class = "row">
+        <div class = "col-6">
           <h5>商品一覧</h5>
         </div>
-        <div class="col-6 text-right">
+        <div class = "col-6 text-right">
           <%= link_to new_admin_item_path do %>
-            <button type="button" class="btn btn-light rounded-circle p-0" style="width:2rem;height:2rem;">
-              <i class="fa-solid fa-plus"></i>
+            <button type = "button" class="btn btn-light rounded-circle p-0" style = "width:2rem;height:2rem;">
+              <i class = "fa-solid fa-plus"></i>
             </button>
           <% end %>
         </div>
       </div>
-      <table class="table table-hover table-inverse">
+      <table class = "table table-hover table-inverse mt-3">
         <thead>
           <tr>
             <th>商品ID</th>
@@ -21,7 +21,7 @@
             <th>税抜価格</th>
             <th>ジャンル</th>
             <th>ステータス</th>
-            <th colspan="5"></th>
+            <th colspan = "5"></th>
           </tr>
         </thead>
         <% @items.each do |item| %>
@@ -33,9 +33,9 @@
             <td><%= item.genre.name %></td>
             <td>
               <% if item.is_active == true %>
-                <span class="text-success"><strong>販売中</strong></span>
+                <span class = "text-success"><strong>販売中</strong></span>
               <% else %>
-                <span class="text-muted"><strong>販売停止中</strong></span>
+                <span class = "text-muted"><strong>販売停止中</strong></span>
               <% end %>
             </td>
           </tr>

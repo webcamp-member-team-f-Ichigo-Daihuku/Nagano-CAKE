@@ -1,33 +1,41 @@
 <h2>注文履歴詳細</h2>
 
 <div class="container">
+  <div class = "row">
+    <div class = "col-md-12">
+  <div class = "row">
+    <div class = "col-md-5">
   <table>
+    <tbody>
     <tr>
-      <th>購入者</th>
-      <th><%= @order.public.last_name %> <%= @order.public.first_name %></th>
+      <th class = "col-2">購入者</th>
+      <th class = "col-3"><%= @order.public.last_name %> <%= @order.public.first_name %></th>
     </tr>
     <tr>
-      <th>注文日</th>
-      <th><%= @order.created_at.strftime("%Y/%m/%d") %></th>
+      <th class = "col-2">注文日</th>
+      <th class = "col-3"><%= @order.created_at.strftime("%Y/%m/%d") %></th>
     </tr>
     <tr>
-      <th>配送先</th>
-      <th><%= @order.address %></p></th>
+      <th class = "col-2">配送先</th>
+      <th class = "col-3"><%= @order.address %></p></th>
     </tr>
     <tr>
-      <th>支払い方法</th>
-      <th><%= @order.payment_method_i18n %></th>
+      <th class = "col-2">支払い方法</th>
+      <th class = "col-3"><%= @order.payment_method_i18n %></th>
     </tr>
     <tr>
-      <th>注文ステータス</th>
+      <th class = "col-2">注文ステータス</th>
+      <th class = "col-3">
+        <%= form_with(model: @order, url: admin_order_path, method: :patch, local: true, class: "form-row") do |f| %>
+          <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6" %>
+          <%= f.submit "更新" %>
+        <% end %>
+      </th>
     </tr>
+    </tbody>
   </table>
-
-  <%= form_with(model: @order, url: admin_order_path, method: :patch, local: true, class: "form-row") do |f| %>
-    <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6" %>
-    <%= f.submit "更新" %>
-  <% end %>
-
+  </div>
+  </div>
   <table class="table">
     <thead class="table-light">
       <th>商品名</th>
@@ -36,23 +44,32 @@
       <th>小計</th>
       <th>制作ステータス</th>
     </thead>
-
+    <% @order_details.each do |order_detail| %>
     <tbody>
-      <% @order_details.each do |order_detail| %>
-      <td><%= order_detail.item.name %></td>
-      <td><%= number_with_delimiter((order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
-      <td><%= order_detail.amount %></td>
-      <td><%= number_with_delimiter((order_detail.amount * order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
-      <td>
-        <%= form_with(model: order_detail, url: admin_order_detail_path, method: :patch, local: true, class: "form-row") do |f| %>
-          <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6" %>
-          <%= f.submit "更新" %>
-        <% end %>
-      </td>
-      <% end %>
+      <tr>
+        <td><%= order_detail.item.name %></td>
+        <td><%= number_with_delimiter((order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= number_with_delimiter((order_detail.amount * order_detail.item.price * 1.1).to_i, delimiter: ',') %></td>
+        <td>
+          <%= form_with(model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true, class: "form-row") do |f| %>
+            <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6" %>
+            <%= f.submit "更新" %>
+          <% end %>
+        </td>
+      </tr>
     </tbody>
-
+    <% end %>
   </table>
-
 </div>
+</div>
+</div>
+
+<script>
+  $(document).on('change', '.name', function() {
+    var selectedGenreId = $(this).val();
+    $('.genre_id').val(selectedGenreId);
+  });
+</script>
+
 

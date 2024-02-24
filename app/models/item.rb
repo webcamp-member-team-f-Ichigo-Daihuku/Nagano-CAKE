@@ -10,6 +10,12 @@ class Item < ApplicationRecord
   end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def remaining_amount
+    cart_items_amount = self.cart_items.sum(:amount)
+    remaining_amount = 10 - cart_items_amount
+    remaining_amount > 0 ? remaining_amount : 0
+  end
 
   def with_tax_price
     (price * 1.1).floor.to_i

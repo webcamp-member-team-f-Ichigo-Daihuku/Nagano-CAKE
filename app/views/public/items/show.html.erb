@@ -1,6 +1,6 @@
-<div class="container px-5 px-sm-0">
-  <div class="row">
-    <div class="col-md-2 offset-md-1">
+<div class = "container px-5 px-sm-0">
+  <div class = "row">
+    <div class = "col-md-2 offset-md-1">
       <%= render 'admin/genres/searth', genres: @genres %>
     </div>
     <div class="col-md-3">
@@ -12,13 +12,13 @@
       <br>
       <h4>
         ¥<%= number_with_delimiter(@item.with_tax_price, delimiter: ',') %>
-        <span style="font-size: 50%;">(税込)</span>
+        <span style = "font-size: 50%;">(税込)</span>
       </h4>
       <br>
       <% if signed_in? && @item.is_active == true %>
         <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
           <%= f.hidden_field :item_id, value: @item.id %>
-          <%= f.select :amount, ('1'..'10').to_a, include_blank: '個数選択' %>
+          <%= f.select :amount, (1..@item.remaining_amount).to_a, include_blank: '個数選択' %>
           <%= f.submit "カートに入れる", class: "btn btn-sm btn-success" %>
         <% end %>
       <% elsif @item.is_active == false %>
