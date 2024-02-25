@@ -21,18 +21,21 @@ class Public::OrdersController < ApplicationController
     when "public_address"
       @order.postal_code = current_public.postal_code
       @order.address = current_public.address
-      @order.name = current_public.last_name + " " + current_public.first_name
-      @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
+      @order.name = current_public.last_name + "  " + current_public.first_name
+      @selected_postal_code = "〒" + current_public.postal_code
+      @selected_address = current_public.address + "  " + current_public.last_name + current_public.first_name
     when "registered_address"
-     
+
 
         selected = Address.find(params[:order][:registered_address_id])
-        @selected_address = selected.postal_code + " " + selected.address + "" + selected.name
+        @selected_postal_code =  "〒" + selected.postal_code
+        @selected_address = selected.address + "  " + selected.name
 
-      
+
     when "new_address"
-      unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
-        @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + "" + params[:order][:new_name]
+      unless params[:order][:new_postal_code] == "  " && params[:order][:new_address] == "  " && params[:order][:new_name] == "  "
+        @selected_postal_code = "〒" + params[:order][:new_postal_code]
+        @selected_address = params[:order][:new_address] + "  " + params[:order][:new_name]
       else
         render :new
       end
