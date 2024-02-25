@@ -3,10 +3,10 @@
     <%= value %>
   </div>
 <% end %>
-<div class = "container px-5 px-sm-0">
+<div class = "container px-5 px-sm-0 address">
   <div class = "row justify-content-center">
     <div class = "col-md-10">
-    <h5>ショッピングカート</h5>
+    <h5><strong>ショッピングカート</strong> <i class="fa-solid fa-cart-shopping"></i></h5>
       <div class = "text-right">
         <%= link_to "カートを空にする",destroy_all_cart_items_path, method: :delete, class: "btn btn-sm btn-danger" %>
       </div>

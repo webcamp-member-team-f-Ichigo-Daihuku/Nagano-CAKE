@@ -29,14 +29,13 @@
           </div>
         </div>
       </div>
-      <table>
+    <table>
         <thead>
-
-          <h4 class = "mt-3"><i class="fa-solid fa-ice-cream"></i> <strong>新着商品 <i class="fa-solid fa-ice-cream"></i></strong></h4>
-            <% @items.each do |item| %>
-            <tr>
-              <th>
-
+          <h4 class = "mt-3"><i class="fa-solid fa-star"></i> <strong>新着商品</strong> <i class="fa-solid fa-star"></i></h4>
+          <% @items.each_slice(4) do |row| %>
+          <tr>
+            <% row.each do |item| %>
+            <th>
               <%= link_to item_path(item) do %>
                 <%= image_tag item.get_item_image(150,150) %>
               <% end %><br>
