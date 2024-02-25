@@ -1,9 +1,10 @@
-<div class="container">
+<div class="container address">
   <div class="row">
     <div class="col">
-      <h4 class="my-5">マイページ</h4>
+      <h4><strong>マイページ</strong> <i class="fa-solid fa-user"></i></h4>
+      <div style="margin-top: 30px;"></div>
       <div class="d-flex align-items-center">
-        <h3><b>登録情報</b></h3>
+        <h5><b>登録情報</b></h5>
         <%= link_to "編集する", edit_public_publicer_path(@publicer), class:"btn btn-success ml-3" %>
       </div>
       <table class="table table-bordrless">
@@ -32,12 +33,14 @@
           <td><%= @publicer.email %></td>
         </tr>
       </table>
+      <div style="margin-top: 30px;"></div>
       <div class="d-flex align-items-center">
-        <h3><b>配送先</b></h3>
+        <h5><b>配送先</b></h5>
         <%= link_to "一覧を見る", public_addresses_path, class:"btn btn-primary ml-3" %>
       </div>
+      <div style="margin-top: 20px;"></div>
       <div class="d-flex align-items-center">
-        <h3><b>注文履歴</b></h3>
+        <h5><b>注文履歴</b></h5>
         <%= link_to "一覧を見る", public_orders_path, class:"btn btn-primary ml-3" %>
       </div>
     </div>
