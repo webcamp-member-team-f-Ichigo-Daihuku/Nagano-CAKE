@@ -46,9 +46,10 @@
       <%#= f.select :order_status, Order.order_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6" %>
 　　　　<br>
       <h4>〈お届け先〉</h4>
+      <%= @selected_postal_code %><br>
       <%= @selected_address %>
       <%= form_with model: @order do |f| %>
-     
+
       <%= f.hidden_field :public_id %>
       <%= f.hidden_field :shipping_cost %>
       <%= f.hidden_field :total_payment %>
