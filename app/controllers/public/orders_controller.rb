@@ -6,7 +6,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new
+    @order = Order.new(order_params)
     @cart_items = CartItem.where(public_id: current_public.id)
     @shipping_cost = 800
     @order.payment_method = params[:order][:payment_method]
@@ -24,12 +24,12 @@ class Public::OrdersController < ApplicationController
       @order.name = current_public.last_name + " " + current_public.first_name
       @selected_address = current_public.postal_code + " " + current_public.address + " " + current_public.last_name + current_public.first_name
     when "registered_address"
-      unless params [:order][:registered_address_id] == ""
+     
+
         selected = Address.find(params[:order][:registered_address_id])
         @selected_address = selected.postal_code + " " + selected.address + "" + selected.name
-      else
-        render :new
-      end
+
+      
     when "new_address"
       unless params[:order][:new_postal_code] == "" && params[:order][:new_address] == "" && params[:order][:new_name] == ""
         @selected_address = params[:order][:new_postal_code] + " " + params[:order][:new_address] + "" + params[:order][:new_name]
@@ -116,6 +116,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-  params.require(:order).permit(:payment_method, :public_id, :shipping_cost, :total_payment, :status, :address_type, :postal_code, :address, :name, :address_type, :registrated_address_id, :new_postal_code, :new_address, :new_name)
+  params.require(:order).permit(:payment_method, :public_id, :shipping_cost, :total_payment, :status, :postal_code, :address, :name, :registrated_address_id)
   end
 end

@@ -20,7 +20,7 @@
           〒<%= current_public.postal_code %><br> <%= current_public.address + " " + current_public.last_name + " " + current_public.first_name%>
         </div>
         <br>
-        <%= f.radio_button :address_type, ":registered_address" %>
+        <%= f.radio_button :address_type, "registered_address" %>
         <%= f.label :address_type, "登録済住所から選択" %>
         <%= f.select :registered_address_id, current_public.addresses.all.map { |m| [[m.postal_code, m.address, m.name].join(" "), m.id] } ,include_blank: "登録してある配送先住所から選択" %>
         <br>

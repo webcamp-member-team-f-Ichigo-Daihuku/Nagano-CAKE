@@ -48,6 +48,7 @@
       <h4>〈お届け先〉</h4>
       <%= @selected_address %>
       <%= form_with model: @order do |f| %>
+     
       <%= f.hidden_field :public_id %>
       <%= f.hidden_field :shipping_cost %>
       <%= f.hidden_field :total_payment %>
