@@ -8,7 +8,7 @@ class Admin::OrdersController < ApplicationController
   @order = Order.find(params[:id])
   if @order.update(order_params)
     if @order.status == "confirm_payment"
-      @order.order_details.each do |order_detail|
+       @order.order_details.each do |order_detail|
         order_detail.update(making_status: "waiting_manufacture")
       end
     end
