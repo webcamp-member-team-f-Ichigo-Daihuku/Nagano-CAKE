@@ -20,10 +20,8 @@
                    <% order.order_details.each do |order_detail| %>
                      <li><%= order_detail.item.name %></li>
                    <% end %>
-
               </ul>
             </td>
-
             <td>¥<%= number_with_delimiter((order.total_payment * 1.1).floor.to_i, delimiter: ',') %></td>
             <td><%= order.status_i18n %></td>
             <td><%= link_to "表示する", order_path(order.id), class: "btn btn-info" %></td>

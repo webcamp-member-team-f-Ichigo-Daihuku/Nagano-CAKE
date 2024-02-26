@@ -25,13 +25,9 @@ class Public::OrdersController < ApplicationController
       @selected_postal_code = "〒" + current_public.postal_code
       @selected_address = current_public.address + "  " + current_public.last_name + current_public.first_name
     when "registered_address"
-
-
-        selected = Address.find(params[:order][:registered_address_id])
-        @selected_postal_code =  "〒" + selected.postal_code
-        @selected_address = selected.address + "  " + selected.name
-
-
+      selected = Address.find(params[:order][:registered_address_id])
+      @selected_postal_code =  "〒" + selected.postal_code
+      @selected_address = selected.address + "  " + selected.name
     when "new_address"
       unless params[:order][:new_postal_code] == "  " && params[:order][:new_address] == "  " && params[:order][:new_name] == "  "
         @selected_postal_code = "〒" + params[:order][:new_postal_code]
@@ -58,7 +54,6 @@ class Public::OrdersController < ApplicationController
     @cart_items_price = ary.sum
     @order.total_payment = @order.shipping_cost + @cart_items_price
     @order.payment_method = params[:order][:payment_method]
-
     if @order.payment_method == "credit_card"
       @order.status = 1
     else
@@ -67,20 +62,19 @@ class Public::OrdersController < ApplicationController
     address_type = params[:order][:address_type]
     case address_type
     when "public_address"
-    @order.postal_code = current_public.postal_code
-    @order.address = current_public.address
-    @order.name = current_public.last_name + current_public.first_name
+      @order.postal_code = current_public.postal_code
+      @order.address = current_public.address
+      @order.name = current_public.last_name + current_public.first_name
     when "registered_address"
-    selected = Address.find(params[:order][:registered_address_id])
-    @order.postal_code = selected.postal_code
-    @order.address = selected.address
-    @order.name = selected.name
+      selected = Address.find(params[:order][:registered_address_id])
+      @order.postal_code = selected.postal_code
+      @order.address = selected.address
+      @order.name = selected.name
     when "new_address"
-    @order.postal_code = params[:order][:new_postal_code]
-    @order.address = params[:order][:new_address]
-    @order.name = params[:order][:new_name]
+      @order.postal_code = params[:order][:new_postal_code]
+      @order.address = params[:order][:new_address]
+      @order.name = params[:order][:new_name]
     end
-
     if @order.save!
       if @order.status == 0
         @cart_items.each do |cart_item|
@@ -98,15 +92,12 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-
     def index
       @orders = Order.page(params[:page]).per(10)
       @order_details = OrderDetail.all
     end
 
     # @order_details = OrderDetail.where(order_id: @order.id)
-
-
   def miss
     redirect_to new_order_path
   end
